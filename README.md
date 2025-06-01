@@ -1,4 +1,4 @@
-# Twinkl React Tech Test
+# ts-react-template
 
 This repository contains a React-based application developed as part of the Twinkl React Tech Test. The app implements a post listing interface with features like infinite scrolling, post deletion, and a search bar. The project uses Vite as the development environment, Tailwind CSS for styling, Vitest for unit testing, and Cypress for end-to-end testing.
 
@@ -28,7 +28,7 @@ This repository contains a React-based application developed as part of the Twin
 
 ### Prerequisites
 
-- Node.js (v18+)
+- Node.js (v20+)
 - npm or yarn
 
 ### Steps
@@ -36,8 +36,8 @@ This repository contains a React-based application developed as part of the Twin
 1. Clone the repository:
 
    ```bash
-   git clone git@github.com:your-username/twinkl-react-tech-test.git
-   cd twinkl-react-tech-test
+   git clone git@github.com:your-username/ts-react-template.git
+   cd ts-react-template
    ```
 
 2. Install dependencies:
