@@ -1,6 +1,6 @@
-import { useSearchContext } from '@/context/SearchContext';
-import useDebouncedValue from '@/hooks/useDebouncedValue';
-import React, { useEffect } from 'react';
+import { useSearchContext } from "@/context/SearchContext";
+import useDebouncedValue from "@/hooks/useDebouncedValue";
+import { useEffect } from "react";
 
 const Header = () => {
   const { searchTerm, setSearchTerm } = useSearchContext();
@@ -11,13 +11,13 @@ const Header = () => {
   }, [debouncedSearchTerm, setSearchTerm]);
 
   return (
-    <div className='flex justify-center p-4'>
+    <div className="flex justify-center p-4">
       <input
-        type='text'
+        type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder='Search posts...'
-        className='w-full max-w-md px-4 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400'
+        placeholder="Search posts..."
+        className="w-full max-w-md px-4 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
       />
     </div>
   );

@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import PostList from './components/PostList/PostList';
-import Loader from './components/Loader/Loader';
-import { SearchProvider } from './context/SearchContext';
-import Header from './components/Header/Header';
+import { useState, useEffect, useRef } from "react";
+import PostList from "./components/PostList/PostList";
+import Loader from "./components/Loader/Loader";
+import { SearchProvider } from "./context/SearchContext";
+import Header from "./components/Header/Header";
 
 interface Post {
   id: number;
@@ -22,15 +22,15 @@ const App = () => {
 
     try {
       const response = await fetch(
-        `https://jsonplaceholder.typicode.com/posts?_page=${pageNumber}`
+        `https://jsonplaceholder.typicode.com/posts?_page=${pageNumber}`,
       );
-      if (!response.ok) throw new Error('Failed to fetch posts');
+      if (!response.ok) throw new Error("Failed to fetch posts");
       const data = await response.json();
       setPosts((prevPosts) => [...prevPosts, ...data]);
       setError(null);
     } catch (error) {
       console.error(error);
-      setError('Unable to load posts. Please try again later.');
+      setError("Unable to load posts. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -55,15 +55,15 @@ const App = () => {
 
   return (
     <SearchProvider>
-      <div className='h-screen flex flex-col bg-blue-50'>
-        <div className='sticky top-0 z-10 bg-white shadow-md'>
+      <div className="h-screen flex flex-col bg-blue-50">
+        <div className="sticky top-0 z-10 bg-white shadow-md">
           <Header />
         </div>
 
-        <div className='flex-1 overflow-y-auto'>
-          {error && <p className='text-center text-red-500 h-full'>{error}</p>}
+        <div className="flex-1 overflow-y-auto">
+          {error && <p className="text-center text-red-500 h-full">{error}</p>}
           {loading && posts.length === 0 ? (
-            <div className='flex justify-center items-center h-full'>
+            <div className="flex justify-center items-center h-full">
               <Loader />
             </div>
           ) : (
