@@ -1,7 +1,7 @@
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import App from "./App";
 import userEvent from "@testing-library/user-event";
-import { vi, Mock } from "vitest";
+import { vi, Mock, expect } from "vitest";
 
 global.fetch = vi.fn();
 

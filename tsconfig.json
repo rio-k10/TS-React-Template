@@ -26,6 +26,19 @@
 
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "cypress.config.ts",
+    "vitest.config.ts",
+    "vite.config.ts",
+    "vitest.setup.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "cypress/videos",
+    "cypress/screenshots",
+    "cypress/fixtures"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

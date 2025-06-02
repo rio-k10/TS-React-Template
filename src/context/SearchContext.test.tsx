@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { SearchProvider, useSearchContext } from "./SearchContext";
-import { vi } from "vitest";
+import { expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 
 describe("SearchContext", () => {

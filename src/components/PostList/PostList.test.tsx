@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { vi, Mock } from "vitest";
+import { vi, Mock, expect } from "vitest";
 import { useSearchContext } from "../../context/SearchContext";
 import PostList from "./PostList";
 

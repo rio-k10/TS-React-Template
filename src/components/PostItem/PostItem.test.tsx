@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import PostItem from "./PostItem";
-import { vi } from "vitest";
+import { expect, vi } from "vitest";
 
 describe("PostItem Component", () => {
   const mockPost = {
