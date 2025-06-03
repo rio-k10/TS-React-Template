@@ -2,23 +2,26 @@
 
 import { Middleware, AnyAction } from "@reduxjs/toolkit";
 
-export const loggerMiddleware: Middleware =
-  (storeAPI) => (next) => (action) => {
-    console.log("[Dispatch]", action);
-    const result = next(action);
-    console.log("[Next State]", storeAPI.getState());
-    return result;
-  };
-
-export const logoutMiddleware: Middleware = () => (next) => (action) => {
-  if (isTypedAction("auth/logout")) {
-    //  some code to clear browser cache, cookies, or local storage
-    console.log("User logged out, clearing session data...");
-    // dispatch more actions or trigger redirect
-  }
-
-  return next(action);
+export const loggerMiddleware: Middleware = (store) => (next) => (action) => {
+  console.log("[Dispatch]", action);
+  const result = next(action);
+  console.log("[Next State]", store.getState());
+  return result;
 };
+
+export const logoutRedirectMiddleware: Middleware =
+  () => (next) => (action) => {
+    //  some code to clear browser cache, cookies, or local storage
+    if (
+      isTypedAction(action) &&
+      action.type === "auth/logout" // Adjust this to your actual logout action type
+    ) {
+      console.log("Redirecting to /login due to logout");
+      // history.push('/login');
+    }
+
+    return next(action);
+  };
 
 function isTypedAction(action: unknown): action is { type: string } {
   return (
