@@ -1,31 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface SearchState {
   query: string;
-  results: string[];
+  loading: boolean;
 }
 
 const initialState: SearchState = {
   query: "",
-  results: [],
+  loading: false,
 };
 
 const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    setQuery: (state, action) => {
+    setQuery(state, action: PayloadAction<string>) {
       state.query = action.payload;
     },
-    setResults: (state, action) => {
-      state.results = action.payload;
+    setLoading(state, action: PayloadAction<boolean>) {
+      state.loading = action.payload;
     },
-    reset(state) {
-      state.query = "";
-      state.results = [];
+    resetSearch() {
+      return initialState;
     },
   },
 });
 
-export const { setQuery, setResults, reset } = searchSlice.actions;
+export const { setQuery, setLoading, resetSearch } = searchSlice.actions;
 export default searchSlice.reducer;

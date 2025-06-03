@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
-import { useSearchContext } from '../../context/SearchContext';
-import Loader from '@/components/Loader/Loader';
-import PostItem from '../PostItem/PostItem';
+import React, { useEffect, useRef } from "react";
+import Loader from "@/components/Loader/Loader";
+import PostItem from "../PostItem/PostItem";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 interface Post {
   id: number;
@@ -20,13 +21,13 @@ const PostList: React.FC<PostListProps> = ({
   posts,
   setPosts,
   loadMorePosts,
-  loading
+  loading,
 }) => {
-  const { searchTerm } = useSearchContext();
+  const { query } = useSelector((state: RootState) => state.search);
   const listRef = useRef<HTMLDivElement | null>(null);
 
   const filteredPosts = posts.filter((post) =>
-    post.title.toLowerCase().includes(searchTerm.toLowerCase())
+    post.title.toLowerCase().includes(query.toLowerCase()),
   );
 
   const handleDelete = (id: number) => {
@@ -37,7 +38,7 @@ const PostList: React.FC<PostListProps> = ({
     if (listRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listRef.current;
       const isPageBottom = scrollTop + clientHeight >= scrollHeight - 10;
-      const canLoadMore = isPageBottom && !loading && !searchTerm;
+      const canLoadMore = isPageBottom && !loading && !query;
       if (canLoadMore) {
         loadMorePosts();
       }
@@ -47,11 +48,11 @@ const PostList: React.FC<PostListProps> = ({
   useEffect(() => {
     const currentRef = listRef.current;
     if (currentRef) {
-      currentRef.addEventListener('scroll', handleScroll);
+      currentRef.addEventListener("scroll", handleScroll);
     }
     return () => {
       if (currentRef) {
-        currentRef.removeEventListener('scroll', handleScroll);
+        currentRef.removeEventListener("scroll", handleScroll);
       }
     };
   }, [listRef, loading]);
@@ -59,22 +60,22 @@ const PostList: React.FC<PostListProps> = ({
   return (
     <div
       ref={listRef}
-      data-testid='post-list'
-      className='h-full overflow-y-auto p-4 space-y-4'
+      data-testid="post-list"
+      className="h-full overflow-y-auto p-4 space-y-4"
     >
-      <ul className='grid gap-4'>
+      <ul className="grid gap-4">
         {filteredPosts.map((post) => (
           <PostItem post={post} onDelete={handleDelete} />
         ))}
       </ul>
       {loading && (
-        <div className='fixed bottom-0 left-0 w-full pb-7 bg-transparent'>
+        <div className="fixed bottom-0 left-0 w-full pb-7 bg-transparent">
           <Loader />
         </div>
       )}
       {!loading && filteredPosts.length === 0 && (
-        <div className='flex justify-center items-center h-full'>
-          <p className='text-gray-500'>No posts found.</p>
+        <div className="flex justify-center items-center h-full">
+          <p className="text-gray-500">No posts found.</p>
         </div>
       )}
     </div>
